@@ -13,3 +13,6 @@ elif grade >= 0.7 :
 elif grade >= 0.6 :
     print ("D")
 else : print ("F")
+"""
+alguns comentarios apenas para poder fazer novo git para experimentar os comandos
+"""
