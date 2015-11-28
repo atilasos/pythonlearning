@@ -1,0 +1,1 @@
+GET http://www.dr-chuck.net/page1.htm HTTP/1.0
