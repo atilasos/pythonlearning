@@ -1,32 +1,39 @@
-def splitlist(a,b,c,d):
-    if len(a) >= 2:
-        splitlist(a[0:len(a)/2],a[len(a)/2:],c,d)
-        if len(a) <= 3 and a[0] <= a[1]:
-            temp=c[0]
-            c[0]=a[0]
-            if a[1] <= temp:
-                c.expand(a[1])
+﻿def splitlist(a):
+    if len(a) > 1:
+        alist = a[0:len(a)/2]
+        blist = a[len(a)/2:]
+        splitlist(alist)
+        splitlist(blist)
+        i = 0
+        j = 0
+        k = 0
+        while i < len(alist) and j < len(blist):
+            if alist[i] < blist[j]:
+                a[k] = alist[i]
+                i += 1
             else:
-                c.expand(temp)
-        elif len(a) == 1 and a[0] <= c[0]:
-            temp=c[0]
-            c[0]=a[0]
-            c.expand(temp)
-        else: print c
-    print c
-
+                a[k] = blist[j]
+                j += 1
+            k += 1
+        while i < len(alist):
+            a[k] = alist[i]
+            i += 1
+            k += 1
+        while j < len(blist):
+            a[k] = blist[j]
+            j += 1
+            k += 1
+    print a
+# start using
 fname = 'mbox-short.txt'
 count = 0
 total = 0
 lst = list()
 fh = open(fname)
 for line in fh:
-    if not line.startswith('X-DSPAM-Confidence:') : continue
-    count +=1
+    if not line.startswith('X-DSPAM-Confidence:'):
+        continue
+    count += 1
     total += float(line[line.find('0'):])
     lst.append(float(line[line.find('0'):]))
-Alist=lst[0:len(lst)/2]
-Blist=lst[len(lst)/2:]
-Clist=list()
-Dlist=list()
-splitlist(Alist,Blist,Clist,Dlist)
+splitlist(lst)
